@@ -15,4 +15,15 @@ function fibs (n) {
     return arr;
 }
 
-console.log(fibs(8))
+function fibsRec(n) {
+    if (n === 0)
+        return [];
+    if (n === 1)
+        return [0];
+    if (n === 2)
+        return [0, 1];
+    
+    const prevArr = fibsRec(n - 1);
+
+    return prevArr.concat(prevArr[prevArr.length - 2] + prevArr[prevArr.length - 1])
+}
