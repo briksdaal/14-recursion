@@ -25,5 +25,11 @@ function fibsRec(n) {
     
     const prevArr = fibsRec(n - 1);
 
-    return prevArr.concat(prevArr[prevArr.length - 2] + prevArr[prevArr.length - 1])
+    return [...prevArr, prevArr[n - 2] + prevArr[n - 3]];
 }
+
+console.log(fibsRec(0))
+console.log(fibsRec(1))
+console.log(fibsRec(2))
+console.log(fibsRec(8))
+console.log(fibsRec(20))
