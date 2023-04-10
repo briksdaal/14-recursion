@@ -1,23 +1,21 @@
 Array.prototype.mergesort = function () {
-    const arrCpy = this.slice();
-    mergesort(arrCpy, 0, arrCpy.length);
-    return arrCpy;
+    mergesort(this, 0, this.length, this.slice());
+    return this;
 }
 
-function mergesort (arr, left, right) {
+function mergesort (arr, left, right, aux) {
     const n = right - left;
     const middle = Math.floor(left + n / 2);
 
     if (n < 2)
         return;
     
-    mergesort(arr, left, middle);
-    mergesort(arr, middle, right);
-    merge(arr, left, right);
+    mergesort(aux, left, middle, arr);
+    mergesort(aux, middle, right, arr);
+    merge(arr, left, right, aux);
 }
 
-function merge(arr, left, right) {
-    const arrCpy = arr.slice();
+function merge(arr, left, right, aux) {
     const middle = Math.floor(left + (right - left) / 2);
 
     let i = left;
@@ -25,10 +23,10 @@ function merge(arr, left, right) {
     let k = left;
 
     while (k < right) {
-        if (i < middle && (j === right || arrCpy[i] <= arrCpy[j])) {
-            arr[k++] = arrCpy[i++];
+        if (i < middle && (j === right || aux[i] <= aux[j])) {
+            arr[k++] = aux[i++];
         } else {
-            arr[k++] = arrCpy[j++];
+            arr[k++] = aux[j++];
         }
     }
 }
