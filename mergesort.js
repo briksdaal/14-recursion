@@ -1,5 +1,36 @@
 Array.prototype.mergesort = function () {
-    return this.sort((a,b) => a - b);
+    const arrCpy = this.slice();
+    mergesort(arrCpy, 0, arrCpy.length);
+    return arrCpy;
+}
+
+function mergesort (arr, left, right) {
+    const n = right - left;
+    const middle = Math.floor(left + n / 2);
+
+    if (n < 2)
+        return;
+    
+    mergesort(arr, left, middle);
+    mergesort(arr, middle, right);
+    merge(arr, left, right);
+}
+
+function merge(arr, left, right) {
+    const arrCpy = arr.slice();
+    const middle = Math.floor(left + (right - left) / 2);
+
+    let i = left;
+    let j = middle;
+    let k = left;
+
+    while (k < right) {
+        if (i < middle && (j === right || arrCpy[i] <= arrCpy[j])) {
+            arr[k++] = arrCpy[i++];
+        } else {
+            arr[k++] = arrCpy[j++];
+        }
+    }
 }
 
 // util functions to test mergesort against js sort
