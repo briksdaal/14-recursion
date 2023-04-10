@@ -28,8 +28,6 @@ function fibsRec(n) {
     return [...prevArr, prevArr[n - 2] + prevArr[n - 3]];
 }
 
-console.log(fibsRec(0))
-console.log(fibsRec(1))
-console.log(fibsRec(2))
-console.log(fibsRec(8))
-console.log(fibsRec(20))
+function fibsRecOneLiner(n, arr = [0, 1]) {
+    return n < 2 ? arr.slice(0, n) : n === 2 ? arr : fibsRecOneLiner(n - 1, [...arr, arr[arr.length - 1] + arr[arr.length - 2]])
+}
