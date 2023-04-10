@@ -29,5 +29,22 @@ function fibsRec(n) {
 }
 
 function fibsRecOneLiner(n, arr = [0, 1]) {
-    return n < 2 ? arr.slice(0, n) : n === 2 ? arr : fibsRecOneLiner(n - 1, [...arr, arr[arr.length - 1] + arr[arr.length - 2]])
+    return n <= arr.length ? arr.slice(0, n) : fibsRecOneLiner(n, [...arr, arr[arr.length - 1] + arr[arr.length - 2]])
+}
+
+let test = true;
+for (let i = 0; i < 100; i++) {
+    arr1 = fibs(i);
+    arr2 = fibsRec(i);
+    arr3 = fibsRecOneLiner(i);
+    if (!(arrayEquality(arr1, arr2) && arrayEquality(arr1, arr3)))
+        test = false;
+}
+
+console.log(test);
+
+function arrayEquality(arr1, arr2) {
+    if (arr1.length !== arr2.length)
+        return false;
+    return arr1.every((el, index) => el === arr2[index]);
 }
